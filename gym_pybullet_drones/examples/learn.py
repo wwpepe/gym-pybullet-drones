@@ -38,10 +38,11 @@ DEFAULT_RECORD_VIDEO = False
 DEFAULT_OUTPUT_FOLDER = 'results'
 DEFAULT_COLAB = False
 
-DEFAULT_OBS = ObservationType('kin') # 'kin' or 'rgb'
+#관측 종류, 제어 종류, 에이전트 수, 단일/다수 에이전트 설정
+DEFAULT_OBS = ObservationType('rgb') # 'kin'(위치,  속도, 자세 벡터만 반환) or 'rgb'(영상 반환)
 DEFAULT_ACT = ActionType('one_d_rpm') # 'rpm' or 'pid' or 'vel' or 'one_d_rpm' or 'one_d_pid'
-DEFAULT_AGENTS = 2
-DEFAULT_MA = False
+DEFAULT_AGENTS = 10
+DEFAULT_MA = True
 
 def run(multiagent=DEFAULT_MA, output_folder=DEFAULT_OUTPUT_FOLDER, gui=DEFAULT_GUI, plot=True, colab=DEFAULT_COLAB, record_video=DEFAULT_RECORD_VIDEO, local=True):
 
@@ -124,7 +125,8 @@ def run(multiagent=DEFAULT_MA, output_folder=DEFAULT_OUTPUT_FOLDER, gui=DEFAULT_
         test_env = HoverAviary(gui=gui,
                                obs=DEFAULT_OBS,
                                act=DEFAULT_ACT,
-                               record=record_video)
+                               record=record_video
+                               )
         test_env_nogui = HoverAviary(obs=DEFAULT_OBS, act=DEFAULT_ACT)
     else:
         test_env = MultiHoverAviary(gui=gui,
